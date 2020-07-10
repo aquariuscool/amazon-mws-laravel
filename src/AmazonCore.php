@@ -97,6 +97,44 @@ use Exception;
  */
 abstract class AmazonCore
 {
+    const URL_BASE_US = 'https://mws.amazonservices.com'; //US
+    const URL_BASE_BR = 'https://mws.amazonservices.com'; //Brazil
+    const URL_BASE_CA = 'https://mws.amazonservices.ca'; //Canada
+    const URL_BASE_MX = 'https://mws.amazonservices.com.mx'; //Mexico
+    const URL_BASE_AE = 'https://mws.amazonservices.ae'; //United Arab Emirates (U.A.E.)
+    const URL_BASE_DE = 'https://mws-eu.amazonservices.com'; //Germany
+    const URL_BASE_EG = 'https://mws-eu.amazonservices.com'; //Egypt
+    const URL_BASE_ES = 'https://mws-eu.amazonservices.com'; //Spain
+    const URL_BASE_FR = 'https://mws-eu.amazonservices.com'; //France
+    const URL_BASE_GB = 'https://mws-eu.amazonservices.com'; //UK
+    const URL_BASE_IN = 'https://mws.amazonservices.in'; //India
+    const URL_BASE_IT = 'https://mws-eu.amazonservices.com'; //Italy
+    const URL_BASE_NL = 'https://mws-eu.amazonservices.com'; //Netherlands
+    const URL_BASE_SA = 'https://mws-eu.amazonservices.com'; //Saudi Arabia
+    const URL_BASE_TR = 'https://mws-eu.amazonservices.com'; //Turkey
+    const URL_BASE_SG = 'https://mws-fe.amazonservices.com'; //Singapore
+    const URL_BASE_AU = 'https://mws.amazonservices.com.au'; //Australia
+    const URL_BASE_JP = 'https://mws.amazonservices.jp'; //Japan
+
+    const MARKETPLACE_ID_US = 'ATVPDKIKX0DER';
+    const MARKETPLACE_ID_BR = 'A2Q3Y263D00KWC';
+    const MARKETPLACE_ID_CA = 'A2EUQ1WTGCTBG2';
+    const MARKETPLACE_ID_MX = 'A1AM78C64UM0Y8';
+    const MARKETPLACE_ID_AE = 'A2VIGQ35RCS4UG';
+    const MARKETPLACE_ID_DE = 'A1PA6795UKMFR9';
+    const MARKETPLACE_ID_EG = 'ARBP9OOSHTCHU';
+    const MARKETPLACE_ID_ES = 'A1RKKUPIHCS9HS';
+    const MARKETPLACE_ID_FR = 'A13V1IB3VIYZZH';
+    const MARKETPLACE_ID_GB = 'A1F83G8C2ARO7P';
+    const MARKETPLACE_ID_IN = 'A21TJRUUN4KGV';
+    const MARKETPLACE_ID_IT = 'APJ6JRA9NG5V4';
+    const MARKETPLACE_ID_NL = 'A1805IZSGTT6HS';
+    const MARKETPLACE_ID_SA = 'A17E79C6D8DWNP';
+    const MARKETPLACE_ID_TR = 'A33AVAJ2PDY3EV';
+    const MARKETPLACE_ID_SG = 'A19VAU5U5O7RUS';
+    const MARKETPLACE_ID_AU = 'A39IBJ37TRP1C6';
+    const MARKETPLACE_ID_JP = 'A1VC38T7YXB528';
+
     protected $urlbase;
     protected $urlbranch;
     protected $throttleLimit;
@@ -134,8 +172,9 @@ abstract class AmazonCore
      */
     protected function __construct($s, $mock = false, $m = null)
     {
-        $this->setConfig();
-        $this->setStore($s);
+        //$this->setConfig();
+        //$this->setStore($s);
+        $this->storeName = $s;
         $this->setMock($mock, $m);
 
         $this->env = __DIR__ . '/environment.php';
@@ -449,6 +488,32 @@ abstract class AmazonCore
         }
     }
 
+    public function setStoreConfigurations($configurations)
+    {
+        $this->options['AWSAccessKeyId'] = config('amazon-mws.AWSAccessKeyId');
+        if (isset($configurations['SellerId'])) {
+            $this->options['SellerId'] = $configurations['SellerId'];
+        } else {
+            $this->log("Seller ID is missing!", 'Warning');
+        }
+
+        if (isset($configurations['authToken']) && !empty($configurations['authToken'])) {
+            $this->options['MWSAuthToken'] = $configurations['authToken'];
+        } else {
+            $this->log("MWS Auth Token is missing!", 'Warning');
+        }
+
+        $region = 'US';
+        if (isset($configurations['region']) && !empty($configurations['region'])) {
+            $region = strtoupper($configurations['region']);
+        }
+
+        $baseURLConstName = "URL_BASE_$region";
+        $marketplaceIdConstName = "MARKETPLACE_ID_$region";
+        $this->urlbase = self::$baseURLConstName;
+        $this->marketplaceId = self::$marketplaceIdConstName;
+    }
+
     /**
      * Enables or disables the throttle stop.
      *
@@ -590,13 +655,15 @@ abstract class AmazonCore
         //     throw new Exception("Config file does not exist!");
         // }
 
-        $store = Config::get('amazon-mws.store');
+//        $store = Config::get('amazon-mws.store');
+//
+//        if (array_key_exists($this->storeName, $store) && array_key_exists('secretKey', $store[$this->storeName])) {
+//            $secretKey = $store[$this->storeName]['secretKey'];
+//        } else {
+//            throw new Exception("Secret Key is missing!");
+//        }
 
-        if (array_key_exists($this->storeName, $store) && array_key_exists('secretKey', $store[$this->storeName])) {
-            $secretKey = $store[$this->storeName]['secretKey'];
-        } else {
-            throw new Exception("Secret Key is missing!");
-        }
+        $secretKey = config('amazon-mws.SecretKey');
 
         unset($this->options['Signature']);
         $this->options['Timestamp'] = $this->genTime();
