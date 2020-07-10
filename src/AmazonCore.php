@@ -97,24 +97,24 @@ use Exception;
  */
 abstract class AmazonCore
 {
-    const URL_BASE_US = 'https://mws.amazonservices.com'; //US
-    const URL_BASE_BR = 'https://mws.amazonservices.com'; //Brazil
-    const URL_BASE_CA = 'https://mws.amazonservices.ca'; //Canada
-    const URL_BASE_MX = 'https://mws.amazonservices.com.mx'; //Mexico
-    const URL_BASE_AE = 'https://mws.amazonservices.ae'; //United Arab Emirates (U.A.E.)
-    const URL_BASE_DE = 'https://mws-eu.amazonservices.com'; //Germany
-    const URL_BASE_EG = 'https://mws-eu.amazonservices.com'; //Egypt
-    const URL_BASE_ES = 'https://mws-eu.amazonservices.com'; //Spain
-    const URL_BASE_FR = 'https://mws-eu.amazonservices.com'; //France
-    const URL_BASE_GB = 'https://mws-eu.amazonservices.com'; //UK
-    const URL_BASE_IN = 'https://mws.amazonservices.in'; //India
-    const URL_BASE_IT = 'https://mws-eu.amazonservices.com'; //Italy
-    const URL_BASE_NL = 'https://mws-eu.amazonservices.com'; //Netherlands
-    const URL_BASE_SA = 'https://mws-eu.amazonservices.com'; //Saudi Arabia
-    const URL_BASE_TR = 'https://mws-eu.amazonservices.com'; //Turkey
-    const URL_BASE_SG = 'https://mws-fe.amazonservices.com'; //Singapore
-    const URL_BASE_AU = 'https://mws.amazonservices.com.au'; //Australia
-    const URL_BASE_JP = 'https://mws.amazonservices.jp'; //Japan
+    const URL_BASE_US = 'https://mws.amazonservices.com/'; //US
+    const URL_BASE_BR = 'https://mws.amazonservices.com/'; //Brazil
+    const URL_BASE_CA = 'https://mws.amazonservices.ca/'; //Canada
+    const URL_BASE_MX = 'https://mws.amazonservices.com.mx/'; //Mexico
+    const URL_BASE_AE = 'https://mws.amazonservices.ae/'; //United Arab Emirates (U.A.E.)
+    const URL_BASE_DE = 'https://mws-eu.amazonservices.com/'; //Germany
+    const URL_BASE_EG = 'https://mws-eu.amazonservices.com/'; //Egypt
+    const URL_BASE_ES = 'https://mws-eu.amazonservices.com/'; //Spain
+    const URL_BASE_FR = 'https://mws-eu.amazonservices.com/'; //France
+    const URL_BASE_GB = 'https://mws-eu.amazonservices.com/'; //UK
+    const URL_BASE_IN = 'https://mws.amazonservices.in/'; //India
+    const URL_BASE_IT = 'https://mws-eu.amazonservices.com/'; //Italy
+    const URL_BASE_NL = 'https://mws-eu.amazonservices.com/'; //Netherlands
+    const URL_BASE_SA = 'https://mws-eu.amazonservices.com/'; //Saudi Arabia
+    const URL_BASE_TR = 'https://mws-eu.amazonservices.com/'; //Turkey
+    const URL_BASE_SG = 'https://mws-fe.amazonservices.com/'; //Singapore
+    const URL_BASE_AU = 'https://mws.amazonservices.com.au/'; //Australia
+    const URL_BASE_JP = 'https://mws.amazonservices.jp/'; //Japan
 
     const MARKETPLACE_ID_US = 'ATVPDKIKX0DER';
     const MARKETPLACE_ID_BR = 'A2Q3Y263D00KWC';
