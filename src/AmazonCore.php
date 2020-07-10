@@ -512,6 +512,7 @@ abstract class AmazonCore
         $marketplaceIdConstName = "MARKETPLACE_ID_$region";
         $this->urlbase = constant("self::$baseURLConstName");
         $this->marketplaceId = constant("self::$marketplaceIdConstName");
+        $this->options['MarketplaceId.Id.1'] = $this->marketplaceId;
     }
 
     /**
