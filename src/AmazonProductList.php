@@ -147,6 +147,8 @@ class AmazonProductList extends AmazonProductsCore implements \Iterator
         }
 
         $this->parseXML($xml);
+
+        return true;
     }
 
     /**

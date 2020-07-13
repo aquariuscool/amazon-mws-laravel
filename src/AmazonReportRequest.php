@@ -272,6 +272,7 @@ class AmazonReportRequest extends AmazonReportsCore
 
         $this->parseXML($xml->ReportRequestInfo);
 
+        return true;
     }
 
     /**
