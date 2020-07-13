@@ -491,14 +491,14 @@ abstract class AmazonCore
     public function setStoreConfigurations($configurations)
     {
         $this->options['AWSAccessKeyId'] = config('amazon-mws.AWSAccessKeyId');
-        if (isset($configurations['SellerId'])) {
-            $this->options['SellerId'] = $configurations['SellerId'];
+        if (isset($configurations['MWS_SellerId']) && !empty($configurations['MWS_SellerId'])) {
+            $this->options['SellerId'] = $configurations['MWS_SellerId'];
         } else {
             $this->log("Seller ID is missing!", 'Warning');
         }
 
-        if (isset($configurations['authToken']) && !empty($configurations['authToken'])) {
-            $this->options['MWSAuthToken'] = $configurations['authToken'];
+        if (isset($configurations['MWS_AuthToken']) && !empty($configurations['MWS_AuthToken'])) {
+            $this->options['MWSAuthToken'] = $configurations['MWS_AuthToken'];
         } else {
             $this->log("MWS Auth Token is missing!", 'Warning');
         }
