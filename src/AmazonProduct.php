@@ -156,6 +156,14 @@ class AmazonProduct extends AmazonProductsCore
                 }
                 $i++;
             }
+
+            if ($xml->Relationships->VariationParent &&
+                $xml->Relationships->VariationParent->Identifiers &&
+                $xml->Relationships->VariationParent->Identifiers->MarketplaceASIN) {
+                foreach ($xml->Relationships->VariationParent->Identifiers->MarketplaceASIN->children() as $x) {
+                    $this->data['Relationships']['VariationParent']['Identifiers']['MarketplaceASIN'][$x->getName()] = (string)$x;
+                }
+            }
         }
         
         //CompetitivePricing
